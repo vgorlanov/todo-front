@@ -34,7 +34,7 @@ export default {
     name: "TaskEdit",
     data: () => ({
         title: null,
-        body: null
+        body: null,
     }),
     props: {
         task: {
@@ -48,6 +48,11 @@ export default {
     },
     methods: {
         save() {
+            this.$store.dispatch('tasks/update', {
+                id: this.task.id,
+                title: this.title,
+                body: this.body
+            });
             this.$emit('save')
         }
     }

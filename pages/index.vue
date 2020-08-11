@@ -42,17 +42,21 @@
 
 <script>
 
-import Picker from "../components/Picker";
+import TaskPicker from "../components/TaskPicker";
 import TaskAdd from "../components/TaskAdd";
 import TaskList from "../components/TaskList";
 
 export default {
+    async fetch({store}) {
+        if(store.getters['tasks/tasks'].length === 0) {
+            await store.dispatch('tasks/fetch')
+        }
+    },
     components: {
-        Picker,
+        TaskPicker,
         TaskAdd,
         TaskList
     },
-
     computed: {
         tasks() {
             return this.$store.getters['tasks/tasks']

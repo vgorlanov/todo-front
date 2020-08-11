@@ -9,17 +9,17 @@
             ></v-text-field>
         </v-col>
         <v-col>
-            <picker></picker>
+            <task-picker></task-picker>
         </v-col>
     </v-row>
 </template>
 
 <script>
-import Picker from "./Picker";
+import TaskPicker from "./TaskPicker";
 export default {
     name: "TaskAdd",
     components: {
-        Picker
+        TaskPicker
     }
 }
 </script>

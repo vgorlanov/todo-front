@@ -272,8 +272,6 @@
 
 
 
-
-
             <v-list-item class="todo-item">
               <v-list-item-action>
                 <v-radio></v-radio>
