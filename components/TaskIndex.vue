@@ -34,27 +34,6 @@ export default {
             require: true
         }
     },
-    methods: {
-
-        //
-        // save() {
-        //     this.editing = false;
-        // },
-        //
-
-        //
-        // done(value) {
-        //     this.isDone = value
-        // },
-        //
-        // cancel() {
-        //     this.editing = false;
-        // },
-        //
-        // del() {
-        //     console.log('ee');
-        // }
-    }
 }
 </script>
 

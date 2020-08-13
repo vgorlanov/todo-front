@@ -3,13 +3,15 @@
 
         <v-row>
             <v-col>
-
                 <!--PROJECT-->
                 <v-card outlined tile>
                     <v-card-title class="justify-center">Проекты</v-card-title>
                     <v-card-subtitle>
-
+                        <project-add></project-add>
                     </v-card-subtitle>
+                    <v-card-text>
+                        <project-list :projects="projects"></project-list>
+                    </v-card-text>
                 </v-card>
                 <!--END PROJECT-->
             </v-col>
@@ -45,21 +47,33 @@
 import TaskPicker from "../components/TaskPicker";
 import TaskAdd from "../components/TaskAdd";
 import TaskList from "../components/TaskList";
+import ProjectList from "../components/ProjectList";
+import ProjectAdd from "../components/ProjectAdd";
 
 export default {
     async fetch({store}) {
         if(store.getters['tasks/tasks'].length === 0) {
             await store.dispatch('tasks/fetch')
         }
+
+        if(store.getters['projects/projects'].length === 0) {
+            await store.dispatch('projects/fetch')
+        }
     },
     components: {
         TaskPicker,
         TaskAdd,
-        TaskList
+        TaskList,
+        ProjectList,
+        ProjectAdd
     },
     computed: {
         tasks() {
             return this.$store.getters['tasks/tasks']
+        },
+
+        projects() {
+            return this.$store.getters['projects/projects']
         }
     }
 }

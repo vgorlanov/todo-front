@@ -1,15 +1,14 @@
 <template>
     <v-list-item class="todo-item">
         <v-list-item-action>
-            <v-checkbox @change="complete" v-model="done"></v-checkbox>
+            <v-checkbox @change="complete" :input-value="task.done"></v-checkbox>
         </v-list-item-action>
         <v-list-item-content>
-            <div class="task-title" :class="{'task-done': done}" @click="$emit('edit')">{{ task.title }}</div>
+            <div class="task-title" :class="{'task-done': task.done}" @click="$emit('edit')">{{ task.title }}</div>
         </v-list-item-content>
-
         <task-picker :current="task.date" @change="onChange"></task-picker>
         <v-list-item-action>
-            <span>x</span>
+            <span class="task-delete" @click="remove">x</span>
         </v-list-item-action>
     </v-list-item>
 </template>
@@ -23,17 +22,11 @@ export default {
     components: {
         TaskPicker
     },
-    data: () => ({
-       done: false
-    }),
     props: {
         task: {
             type: Object,
             required: true
         }
-    },
-    mounted() {
-        this.done = this.task.done
     },
     methods: {
         complete(value) {
@@ -46,8 +39,13 @@ export default {
             this.$store.dispatch('tasks/update',
                 Object.assign({}, this.task, {date: value})
             )
+        },
+
+        remove() {
+            this.$store.dispatch('tasks/delete', this.task)
         }
-    }
+    },
+
 
 }
 </script>
@@ -58,9 +56,10 @@ export default {
         color: grey !important;
     }
 
-    .task-title {
+    .task-title, .task-delete {
         cursor: pointer;
         color: black;
         font-size: 20px;
     }
+
 </style>
