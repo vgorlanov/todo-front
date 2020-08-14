@@ -23,6 +23,10 @@ export const mutations = {
         if(index !== -1) {
             state.tasks.splice(index, 1)
         }
+    },
+
+    deleteByProject(state, project_id) {
+        state.tasks = state.tasks.filter(item => item.project_id !== project_id)
     }
 }
 
@@ -48,9 +52,12 @@ export const actions = {
         if(result) {
             commit('deleteTask', payload)
         }
-    }
+    },
+
 }
 
 export const getters = {
     tasks: s => s.tasks,
+    free: s => s.tasks.filter(item => item.date === null && item.project_id === null),
+    date: s => s.tasks.filter(item => item.date !== null),
 }

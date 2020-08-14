@@ -17,6 +17,14 @@ export const mutations = {
             state.projects.unshift(project)
         }
     },
+
+    deleteProject(state, project) {
+        const index = state.projects.findIndex(elem => elem.id === project.id)
+
+        if(index !== -1) {
+            state.projects.splice(index, 1)
+        }
+    }
 }
 
 
@@ -27,8 +35,8 @@ export const actions = {
     },
 
     async update({commit}, payload) {
-        const projects = await this.$axios.$put('projects/' + payload.id, payload)
-        commit('setProjects', projects)
+        const project = await this.$axios.$put('projects/' + payload.id, payload)
+        commit('setProject', project)
     },
 
     async save({commit}, payload) {
@@ -37,7 +45,11 @@ export const actions = {
     },
 
     async delete({commit}, payload) {
+        const result = await this.$axios.$delete('projects/' + payload.id)
 
+        if(result) {
+            commit('deleteProject', payload)
+        }
     }
 }
 

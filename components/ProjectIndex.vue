@@ -1,10 +1,23 @@
 <template>
     <div>
-        <h3 class="mb-2 mt-1">{{ project.title }}</h3>
+        <project-edit
+            v-if="edit"
+            @updated="edit = false"
+            :project="project"
+        ></project-edit>
+        <h3
+            class="mb-2 project-title"
+            v-else
+            @click="edit = true"
+        >
+            {{ project.title }}
+            <v-btn @click="remove" class="text-right" small text fab color="error">x</v-btn>
+        </h3>
 
         <task-add
             v-if="add"
-            
+            @added="added"
+            :project="project.id"
         ></task-add>
         <span
             v-else
@@ -22,15 +35,18 @@
 
 import TaskList from "./TaskList";
 import TaskAdd from "./TaskAdd";
+import ProjectEdit from "./ProjectEdit";
 
 export default {
     name: "ProjectIndex",
     components: {
         TaskList,
-        TaskAdd
+        TaskAdd,
+        ProjectEdit
     },
     data: () => ({
-        add: false
+        add: false,
+        edit: false,
     }),
     props: {
         project: {
@@ -43,12 +59,29 @@ export default {
             const tasks = this.$store.getters['tasks/tasks']
             return tasks.filter(item => item.project_id === this.project.id)
         }
+    },
+    methods: {
+        added() {
+            this.add = false
+        },
+        remove() {
+            this.$store.dispatch('projects/delete', this.project);
+            this.$store.commit('tasks/deleteByProject', this.project.id)
+        }
     }
 }
 </script>
 
 <style scoped>
     .project-task-add {
+        cursor: pointer;
+    }
+
+    .project-delete {
+        float: right;
+    }
+
+    .project-title {
         cursor: pointer;
     }
 </style>

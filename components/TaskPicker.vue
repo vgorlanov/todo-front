@@ -23,7 +23,10 @@
             no-title
             @change="change"
             v-model="date"
-        ></v-date-picker>
+        >
+            <v-btn text @click="today" color="primary">Сегодня</v-btn>
+            <v-btn text @click="tomorrow" color="primary">Завтра</v-btn>
+        </v-date-picker>
     </v-menu>
 </template>
 
@@ -47,10 +50,20 @@ export default {
             this.$refs.menu.save(date)
             this.$emit('change', date)
         },
+        today() {
+            let today = new Date().toISOString().substr(0, 10);
+            this.change(today)
+        },
+        tomorrow() {
+            let tomorrow = new Date();
+            tomorrow.setDate(new Date().getDate() + 1);
+            tomorrow = tomorrow.toISOString().substr(0, 10);
+            this.change(tomorrow)
+        }
     },
     computed: {
         label() {
-            return this.date !== null ? this.date : new Date().toISOString().substr(0, 10)
+            return this.date !== null ? this.date : 'дата'
         }
     }
 }

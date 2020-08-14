@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col cols="10">
+        <v-col :class="{'col-10' : !hideDate, 'col-12' : hideDate}">
             <v-text-field
                 label="Добавить задачу"
                 outlined
@@ -9,8 +9,8 @@
                 @keyup.enter="add"
             ></v-text-field>
         </v-col>
-        <v-col>
-            <task-picker @change="change"></task-picker>
+        <v-col v-if="!hideDate">
+            <task-picker  @change="change"></task-picker>
         </v-col>
     </v-row>
 </template>
@@ -23,12 +23,19 @@ export default {
         TaskPicker
     },
     data: () => ({
-       date: new Date().toISOString().substr(0, 10)
+       date: null
     }),
     props: {
         project: {
             default: null
+        },
+        hideDate: {
+            type: Boolean,
+            default: false
         }
+    },
+    created() {
+        this.date = !this.hideDate ? new Date().toISOString().substr(0, 10) : null
     },
     methods: {
         add(e) {

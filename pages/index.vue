@@ -34,6 +34,12 @@
                 <!--NEW-->
                 <v-card outlined tile>
                     <v-card-title class="justify-center">Входящие</v-card-title>
+                    <v-card-subtitle>
+                        <task-add :hide-date="true"></task-add>
+                    </v-card-subtitle>
+                    <v-card-text>
+                        <task-list :tasks="free"></task-list>
+                    </v-card-text>
                 </v-card>
                 <!--END NEW-->
             </v-col>
@@ -69,7 +75,11 @@ export default {
     },
     computed: {
         tasks() {
-            return this.$store.getters['tasks/tasks']
+            return this.$store.getters['tasks/date']
+        },
+
+        free() {
+            return this.$store.getters['tasks/free']
         },
 
         projects() {
