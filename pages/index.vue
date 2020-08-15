@@ -50,11 +50,11 @@
 
 <script>
 
-import TaskPicker from "../components/TaskPicker";
-import TaskAdd from "../components/TaskAdd";
-import TaskList from "../components/TaskList";
-import ProjectList from "../components/ProjectList";
-import ProjectAdd from "../components/ProjectAdd";
+import TaskPicker from "../components/Task/TaskPicker";
+import TaskAdd from "../components/Task/TaskAdd";
+import TaskList from "../components/Task/TaskList";
+import ProjectList from "../components/Project/ProjectList";
+import ProjectAdd from "../components/Project/ProjectAdd";
 
 export default {
     async fetch({store}) {

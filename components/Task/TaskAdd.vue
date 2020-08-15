@@ -10,7 +10,7 @@
             ></v-text-field>
         </v-col>
         <v-col v-if="!hideDate">
-            <task-picker  @change="change"></task-picker>
+            <task-picker :current="date" @change="change"></task-picker>
         </v-col>
     </v-row>
 </template>
@@ -35,7 +35,7 @@ export default {
         }
     },
     created() {
-        this.date = !this.hideDate ? new Date().toISOString().substr(0, 10) : null
+        this.date = this.hideDate ? null : new Date().toISOString().substr(0, 10)
     },
     methods: {
         add(e) {

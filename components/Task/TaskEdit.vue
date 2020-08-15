@@ -7,6 +7,7 @@
             autofocus
             v-model="title"
             @keyup.esc="$emit('cancel')"
+            @keyup.enter="save"
             class="mb-1"
         ></v-text-field>
         <v-textarea

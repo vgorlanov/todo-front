@@ -18,6 +18,7 @@
             v-if="add"
             @added="added"
             :project="project.id"
+            :hide-date="true"
         ></task-add>
         <span
             v-else
@@ -33,8 +34,8 @@
 
 <script>
 
-import TaskList from "./TaskList";
-import TaskAdd from "./TaskAdd";
+import TaskList from "../Task/TaskList";
+import TaskAdd from "../Task/TaskAdd";
 import ProjectEdit from "./ProjectEdit";
 
 export default {

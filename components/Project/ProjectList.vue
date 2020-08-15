@@ -3,7 +3,6 @@
         <project-index :project="project" v-for="project in projects" :key="project.id">
             {{ project.title }}
         </project-index>
-
     </div>
 </template>
 
