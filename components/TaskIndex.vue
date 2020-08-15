@@ -11,6 +11,7 @@
             :task="task"
             @edit="editing = true"
         ></task>
+
     </div>
 </template>
 

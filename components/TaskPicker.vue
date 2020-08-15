@@ -2,7 +2,6 @@
     <v-menu
         ref="menu"
         :close-on-content-click="false"
-        :return-value.sync="date"
         transition="scale-transition"
         offset-y
     >
@@ -22,10 +21,11 @@
         <v-date-picker
             no-title
             @change="change"
-            v-model="date"
+            :value="current"
         >
             <v-btn text @click="today" color="primary">Сегодня</v-btn>
             <v-btn text @click="tomorrow" color="primary">Завтра</v-btn>
+            <v-btn text @click="free" color="primary">Удалить</v-btn>
         </v-date-picker>
     </v-menu>
 </template>
@@ -34,16 +34,10 @@
 export default {
     name: "TaskPicker",
     data: () => ({
-        date: null,
         menu: false,
     }),
     props: {
         current: null
-    },
-    mounted() {
-        if(this.current !== undefined) {
-            this.date = this.current
-        }
     },
     methods: {
         change(date) {
@@ -59,11 +53,14 @@ export default {
             tomorrow.setDate(new Date().getDate() + 1);
             tomorrow = tomorrow.toISOString().substr(0, 10);
             this.change(tomorrow)
+        },
+        free() {
+            this.change(null)
         }
     },
     computed: {
         label() {
-            return this.date !== null ? this.date : 'дата'
+            return this.current !== null ? this.current : 'дата'
         }
     }
 }
