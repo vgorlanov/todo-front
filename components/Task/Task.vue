@@ -1,5 +1,5 @@
 <template>
-    <v-list-item class="todo-item">
+    <v-list-item class="todo-item pl-0 pr-0">
         <v-list-item-action>
             <v-checkbox @change="complete" :input-value="task.done"></v-checkbox>
         </v-list-item-action>

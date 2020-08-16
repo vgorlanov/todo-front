@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <task-edit
             v-if="editing"
             :task="task"

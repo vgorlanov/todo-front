@@ -3,6 +3,7 @@
         label="Добавить проект"
         outlined
         dense
+        hide-details
         class="mt-3"
         v-model="title"
         @keyup.enter="save"

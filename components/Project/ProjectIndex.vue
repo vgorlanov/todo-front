@@ -5,30 +5,33 @@
             @updated="edit = false"
             :project="project"
         ></project-edit>
-        <h3
-            class="mb-2 project-title"
-            v-else
-            @click="edit = true"
-        >
-            {{ project.title }}
-            <v-btn @click="remove" class="text-right" small text fab color="error">x</v-btn>
-        </h3>
+        <div v-else>
+            <project
+                @remove="remove"
+                @edit="edit = true"
+                @fade="show = !show"
+                :project="project"
+            ></project>
+        </div>
 
-        <task-add
-            v-if="add"
-            @added="added"
-            :project="project.id"
-            :hide-date="true"
-        ></task-add>
-        <span
-            v-else
-            @click="add = true"
-            class="project-task-add"
-        >
-            + Добавить задачу
-        </span>
+        <div v-show="show">
+            <task-add
+                v-if="add"
+                @added="added"
+                :project="project.id"
+                :hide-date="true"
+            ></task-add>
+            <span
+                v-else
+                @click="add = true"
+                class="project-task-add"
+            >
+                + Добавить задачу
+            </span>
 
-        <task-list :tasks="tasks"></task-list>
+            <task-list :tasks="tasks"></task-list>
+        </div>
+
     </div>
 </template>
 
@@ -37,17 +40,20 @@
 import TaskList from "../Task/TaskList";
 import TaskAdd from "../Task/TaskAdd";
 import ProjectEdit from "./ProjectEdit";
+import Project from "./Project";
 
 export default {
     name: "ProjectIndex",
     components: {
         TaskList,
         TaskAdd,
-        ProjectEdit
+        ProjectEdit,
+        Project
     },
     data: () => ({
         add: false,
         edit: false,
+        show: true,
     }),
     props: {
         project: {

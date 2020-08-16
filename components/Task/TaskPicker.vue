@@ -10,7 +10,7 @@
                 readonly
                 v-bind="attrs"
                 v-on="on"
-                x-small
+                small
                 text
                 color="primary"
             >
@@ -23,9 +23,9 @@
             @change="change"
             :value="current"
         >
-            <v-btn text @click="today" color="primary">Сегодня</v-btn>
-            <v-btn text @click="tomorrow" color="primary">Завтра</v-btn>
-            <v-btn text @click="free" color="primary">Удалить</v-btn>
+            <v-btn  text @click="today" color="green">Сегодня</v-btn>
+            <v-btn  text @click="tomorrow" color="primary">Завтра</v-btn>
+            <v-btn  text @click="free" color="error">Удалить</v-btn>
         </v-date-picker>
     </v-menu>
 </template>
@@ -60,7 +60,7 @@ export default {
     },
     computed: {
         label() {
-            return this.current !== null ? this.current : 'дата'
+            return this.current ? this.current : 'дата'
         }
     }
 }
