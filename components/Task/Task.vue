@@ -1,14 +1,22 @@
 <template>
     <v-list-item class="todo-item pl-0 pr-0">
-        <v-list-item-action>
-            <v-checkbox @change="complete" :input-value="task.done"></v-checkbox>
+        <v-list-item-action class="mr-3 task-drag">
+            <v-icon>drag_handle</v-icon>
+        </v-list-item-action>
+        <v-list-item-action  class="mr-3">
+            <v-checkbox  @change="complete" :input-value="task.done"></v-checkbox>
         </v-list-item-action>
         <v-list-item-content>
             <div class="task-title" :class="{'task-done': task.done}" @click="$emit('edit')">{{ task.title }}</div>
+
+<!--            {{ task.orders }}-->
+
         </v-list-item-content>
         <task-picker :current="task.date" @change="onChange"></task-picker>
         <v-list-item-action>
-            <span class="task-delete" @click="remove">x</span>
+            <span class="task-delete" @click="remove">
+                <v-icon>clear</v-icon>
+            </span>
         </v-list-item-action>
     </v-list-item>
 </template>
@@ -45,8 +53,6 @@ export default {
             this.$store.dispatch('tasks/delete', this.task)
         }
     },
-
-
 }
 </script>
 
@@ -60,6 +66,10 @@ export default {
         cursor: pointer;
         color: black;
         font-size: 20px;
+    }
+
+    .task-drag {
+        cursor: move;
     }
 
 </style>

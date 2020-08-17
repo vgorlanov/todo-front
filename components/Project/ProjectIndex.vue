@@ -21,13 +21,13 @@
                 :project="project.id"
                 :hide-date="true"
             ></task-add>
-            <span
+            <div
                 v-else
                 @click="add = true"
-                class="project-task-add"
+                class="project-task-add my-2"
             >
-                + Добавить задачу
-            </span>
+                <v-icon>add</v-icon> Добавить задачу
+            </div>
 
             <task-list :tasks="tasks"></task-list>
         </div>

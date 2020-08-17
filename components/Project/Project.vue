@@ -1,19 +1,23 @@
 <template>
     <v-row>
-        <v-col cols="1" class="pb-0">
-            <span class="mr-2">=</span>
-            <span @click="$emit('fade')">v</span>
+        <v-col cols="1" md="1" sm="2" class="pr-0 project-control">
+            <v-icon>drag_handle</v-icon>
+            <span @click="$emit('fade')">
+            <v-icon>keyboard_arrow_down</v-icon>
+        </span>
         </v-col>
-        <v-col cols="10" class="pb-0">
-            <h3
+        <v-col cols="10" md="10" sm="9">
+            <h2
                 class="mb-2 project-title"
                 @click="$emit('edit')"
             >
                 {{ project.title }}
-            </h3>
+            </h2>
         </v-col>
-        <v-col cols="1" class="pb-0">
-            <v-btn @click="$emit('remove')" class="text-right" small text fab color="error">x</v-btn>
+        <v-col col="1" align="right" class="project-delete">
+            <span @click="$emit('remove')">
+                <v-icon>clear</v-icon>
+            </span>
         </v-col>
     </v-row>
 </template>
@@ -31,5 +35,11 @@ export default {
 </script>
 
 <style scoped>
+    .project-title {
+        color: black;
+    }
 
+    .project-delete , .project-control{
+        cursor: pointer;
+    }
 </style>
